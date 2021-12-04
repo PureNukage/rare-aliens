@@ -1,6 +1,13 @@
 #region		Camera Logic
 
-//zoom_level = clamp((zoom_level + (mouse_wheel_down()-mouse_wheel_up())*0.1),0.25,1.0)
+if cameraRefresh {
+	cameraFix()
+	cameraRefresh = false
+}
+
+zoom_level = clamp((zoom_level + (mouse_wheel_down()-mouse_wheel_up())*0.1),0.25,1.0)
+
+//zoom_level = 0.5
 
 camera_set_view_pos(camera,
 		clamp( camera_get_view_x(camera), 0, room_width - camera_get_view_width(camera) ),
@@ -35,5 +42,25 @@ var edgeX = camera_get_view_width(camera)/2
 var edgeY = camera_get_view_height(camera)/2
 x = clamp(x,0+edgeX,room_width-edgeX)
 y = clamp(y,0+edgeY,room_height-edgeY)
+
+if instance_exists(player) {
+	x = player.x
+	y = player.y
+	//if player.onGround {
+		var angle = player.image_angle
+		if player.image_angle >= 180 and player.image_angle < 360 {
+			angle = 360 - player.image_angle
+		} else if player.image_angle < 180 {
+			angle = 360 - player.image_angle
+		} else if player.image_angle > 360 {
+			angle = 360 - player.image_angle
+		}
+		var Direction = point_direction(player.x,player.y, player.planet_current.x,player.planet_current.y)
+		var current_angle = camera_get_view_angle(camera)
+		var new_angle = lerp(current_angle, angle, 0.03)
+		if (sign(angle) != sign(current_angle)) new_angle = angle
+		camera_set_view_angle(camera, new_angle)
+	//}
+}
 
 #endregion

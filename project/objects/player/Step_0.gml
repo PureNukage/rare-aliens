@@ -80,6 +80,7 @@ if point_in_rectangle(mouse_x,mouse_y,bbox_left,bbox_top,bbox_right,bbox_bottom)
 
 //	Players angle towards planet center
 if planet_current > -1 {
-	var Direction = point_direction(planet_current.x,planet_current.y, x,y)
-	image_angle = Direction - 90
+	//var Direction = point_direction(planet_current.x,planet_current.y, x,y)
+	var Direction = point_direction(x,y, planet_current.x,planet_current.y)
+	image_angle = Direction + 90
 }

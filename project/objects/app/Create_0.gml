@@ -1,6 +1,8 @@
 creator = ""
 version = ""
 
+cameraRefresh = false
+
 var Layer = "Instances"
 instance_create_layer(0,0,Layer,input)
 instance_create_layer(0,0,Layer,debug)
@@ -123,3 +125,4 @@ cameraSetup()
 scale_canvas(1280, 720)
 
 room_goto(Room1)
+cameraRefresh = true

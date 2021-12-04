@@ -17,3 +17,7 @@ keyJump = keyboard_check_pressed(vk_space)
 
 keyArrowUp = keyboard_check_pressed(vk_up)
 keyArrowDown = keyboard_check_pressed(vk_down)
+keyArrowRight = keyboard_check(vk_right)
+keyArrowLeft = keyboard_check(vk_left)
+
+keyRestart = keyboard_check_pressed(ord("R"))

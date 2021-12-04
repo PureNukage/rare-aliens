@@ -5,9 +5,7 @@ if cameraRefresh {
 	cameraRefresh = false
 }
 
-zoom_level = clamp((zoom_level + (mouse_wheel_down()-mouse_wheel_up())*0.1),0.25,1.0)
-
-//zoom_level = 0.5
+zoom_level = clamp((zoom_level + (mouse_wheel_down()-mouse_wheel_up())*0.1),0.25,2.0)
 
 camera_set_view_pos(camera,
 		clamp( camera_get_view_x(camera), 0, room_width - camera_get_view_width(camera) ),
@@ -58,7 +56,9 @@ if instance_exists(player) {
 		var Direction = point_direction(player.x,player.y, player.planet_current.x,player.planet_current.y)
 		var current_angle = camera_get_view_angle(camera)
 		var new_angle = lerp(current_angle, angle, 0.03)
-		if (sign(angle) != sign(current_angle)) new_angle = angle
+		if (sign(angle) != sign(current_angle)) {
+			new_angle = angle
+		}
 		camera_set_view_angle(camera, new_angle)
 	//}
 }

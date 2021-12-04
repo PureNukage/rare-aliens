@@ -1,7 +1,18 @@
 //	Planet check
-if instance_nearest(x,y,planet) > -1 and planet_current == -1 {
-	planet_current = instance_nearest(x,y,planet)
+if instance_nearest(x,y,planet) > -1 and planet_switch_timer == -1 {
+	if planet_current == -1 {
+		planet_previous = planet_current
+		planet_current = instance_nearest(x,y,planet)
+		planet_switch_timer = 60
+	}
+	//	Already have a planet, switching?
+	else if planet_current > -1 and planet_current != instance_nearest(x,y,planet) {
+		planet_previous = planet_current
+		planet_current = instance_nearest(x,y,planet)
+		planet_switch_timer = 60
+	}
 }
+if planet_switch_timer > -1 planet_switch_timer--
 
 //	Movement
 hspd = (input.keyRight - input.keyLeft) * 3
